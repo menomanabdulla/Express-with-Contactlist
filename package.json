@@ -1,0 +1,34 @@
+{
+  "name": "express-with-contactlist",
+  "version": "1.0.0",
+  "description": "Complete API project with real life experience",
+  "main": "server.js",
+  "scripts": {
+   "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menomanabdulla/Express-with-Contactlist.git"
+  },
+  "keywords": [
+    "express",
+    "API",
+    "node",
+    "contactlistAPI",
+    "front-end"
+  ],
+  "author": "noman abdulla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/menomanabdulla/Express-with-Contactlist/issues"
+  },
+  "homepage": "https://github.com/menomanabdulla/Express-with-Contactlist#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.5"
+  }
+}
