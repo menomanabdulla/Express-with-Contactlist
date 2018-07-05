@@ -1,5 +1,5 @@
 
-/*const createContact = (req,res)=>{
+const createContact = (req,res)=>{
     res.json({
         msg: 'hello form post contact'
     })
@@ -28,7 +28,7 @@ const deleteContact = (req,res)=>{
         msg: 'hello form delete contact'
     })
 }
-*/
+
 /*const searchContact = (req,res)=>{
     res.json({
         msg: 'hello form search contact'
