@@ -12,4 +12,6 @@ const contactShema = new Schema({
       votes: Number,
       favs:  Number
     }
-  });
+  })
+
+const sontactShema = mongoose.model('contactShema', blogSchema)
