@@ -6,7 +6,9 @@ const signUpUser = (req,res)=>{
         name: req.body.name,
         email: req.body.email,
         userName: req.body.userName,
-        password: req.body.password
+        password: req.body.password,
+        contactList: [],
+        favoriteList: []
     })
     contacts.save()
       .then(user=>{
