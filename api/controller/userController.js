@@ -1,7 +1,7 @@
 
 const user = require('../model/userModel')
 
-const signiUpUser = (req,res)=>{
+const signUpUser = (req,res)=>{
     const user = new user({
         name: req.body.name,
         email: req.body.email,
@@ -60,7 +60,7 @@ const faveListDelete = (req,res)=>{
 }
   
 module.exports = {
-    signiUpUser,
+    signUpUser,
     signInUser,
     user,
     upadateUser,

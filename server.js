@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
+const userRoute = require('./api/router/userRouter')
 const contactRouter = require('./api/router/contactRouter')
 //db connection
 mongoose.Promise = global.Promise
@@ -17,6 +18,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use('/api/contact',contactRouter)
+app.use('/api/user',userRoute)
 
 //error handaling
 app.use((req,res,next)=>{

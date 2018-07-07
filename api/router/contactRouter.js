@@ -1,9 +1,6 @@
 const router = require('express').Router()
 
-const userController = require('../controller/userController')
 const contactController =  require('../controller/contactController')
-
-//user route
 
 //contacts route
 router.post('/contacts',contactController.createContact)

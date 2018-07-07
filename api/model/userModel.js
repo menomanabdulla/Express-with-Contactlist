@@ -32,7 +32,9 @@ const userSchema = new Schema({
     unique : true,
     required: true,
     minlength: 6
-   }
+   },
+   contactList: [],
+   favoriteList:[]
   })
 
 const user= mongoose.model('user', userSchema)
