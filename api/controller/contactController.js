@@ -1,7 +1,25 @@
 
+const Contacts = require('../model/contactModel')
+
 const createContact = (req,res)=>{
-    res.json({
-        msg: 'hello form post contact'
+  const contacts = new Contacts({
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      fbid: req.body.fbid
+  })
+  contacts.save()
+    .then(contacts=>{
+        console.log(contacts)
+        res.status(201).json({
+            contacts
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+            err
+        })
     })
 }
 
