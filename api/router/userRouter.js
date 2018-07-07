@@ -9,3 +9,5 @@ router.patch('/update',userController.upadateUser)
 router.get('/fovourite',userController.faveList)
 router.patch('/fovourite-update',userController.faveListUpdate)
 router.delete('/fovourite-delete',userController.faveListDelete)
+
+module.exports = router

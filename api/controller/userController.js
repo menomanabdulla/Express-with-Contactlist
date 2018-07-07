@@ -1,8 +1,8 @@
 
-const user = require('../model/userModel')
+const userModel = require('../model/userModel')
 
 const signUpUser = (req,res)=>{
-    const user = new user({
+    const user = new userModel({
         name: req.body.name,
         email: req.body.email,
         userName: req.body.userName,
