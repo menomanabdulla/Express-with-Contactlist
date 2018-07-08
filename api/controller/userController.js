@@ -1,27 +1,37 @@
 
 const userModel = require('../model/userModel')
+const bcrypt = require('bcrypt-nodejs')
 
-const signUpUser = (req,res)=>{
-    const user = new userModel({
-        name: req.body.name,
-        email: req.body.email,
-        userName: req.body.userName,
-        password: req.body.password
-    })
-    user.save()
-      .then(user=>{
-          console.log(user)
-          res.status(201).json({
-            user
-          })
-      })
 
-      .catch(err=>{
-          console.log(err)
-          res.status(500).json({
-              err
-          })
-      })
+const signUpUser = (req,res,next)=>{
+    bcrypt.hash(req.body.password, null, null, function(err, hash) {
+        if(err){
+            res.json({
+                msg: 'hashing faild'
+            })
+        }else{
+            const user = new userModel({
+                name: req.body.name,
+                email: req.body.email,
+                userName: req.body.userName,
+                password: hash
+            })
+            user.save()
+              .then(user=>{
+                  console.log(user)
+                  res.status(201).json({
+                    user
+                  })
+              })
+        
+              .catch(err=>{
+                  console.log(err)
+                  res.status(500).json({
+                      err
+                  })
+              })
+        }
+    });
   }
   
 const signInUser = (req,res)=>{

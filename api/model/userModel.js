@@ -34,13 +34,11 @@ const userSchema = new Schema({
    {
      contactList:{
        type: String,
-       trim: true,
-       unique : true
+       trim: true
      },
      favoriteList:{
        type: String,
-       trim: true,
-       unique : true
+       trim: true
      }
     }
   ]

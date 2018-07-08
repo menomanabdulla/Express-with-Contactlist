@@ -1,6 +1,7 @@
 
 const ContactsModule = require('../model/contactModel')
 const createContact = (req,res,next)=>{
+
   const contacts = new ContactsModule({
       "name": req.body.name,
       "email": req.body.email,
