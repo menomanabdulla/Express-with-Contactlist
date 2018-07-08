@@ -3,8 +3,8 @@ const router = require('express').Router()
 const contactController =  require('../controller/contactController')
 
 //contacts route
-router.post('/contacts',contactController.createContact)
-router.get('/contacts',contactController.allContact)
+router.post('/',contactController.createContact)
+router.get('/',contactController.allContact)
 router.get('/contacts/:id',contactController.singleContact)
 router.patch('/contacts/:id',contactController.upadeContact)
 router.delete('/contacts/:id',contactController.deleteContact)

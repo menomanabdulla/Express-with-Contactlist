@@ -6,17 +6,16 @@ const signUpUser = (req,res)=>{
         name: req.body.name,
         email: req.body.email,
         userName: req.body.userName,
-        password: req.body.password,
-        contactList: [],
-        favoriteList: []
+        password: req.body.password
     })
-    contacts.save()
+    user.save()
       .then(user=>{
           console.log(user)
           res.status(201).json({
             user
           })
       })
+
       .catch(err=>{
           console.log(err)
           res.status(500).json({

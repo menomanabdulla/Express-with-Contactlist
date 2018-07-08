@@ -11,16 +11,8 @@ const userSchema = new Schema({
    email: {
     type: String,
     trim: true,
-    unique : true,
-    required: true,
-    minlength: 3,
-    validate: {
-        validator: (e)=> {
-          return validator.isEmail(e)
-        },
-        message: 'Invalid email.',
-      }
-    },
+    unique : true
+   },
    userName: {
     type: String,
     trim: true,
@@ -32,9 +24,7 @@ const userSchema = new Schema({
     unique : true,
     required: true,
     minlength: 6
-   },
-   contactList: [],
-   favoriteList:[]
+   }
   })
 
 const user= mongoose.model('user', userSchema)

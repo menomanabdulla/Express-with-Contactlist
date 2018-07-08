@@ -17,7 +17,7 @@ mongoose.connect('mongodb://menomanabdulla:noman123321BAPPY@ds121861.mlab.com:21
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use('/api/contact',contactRouter)
+app.use('/api/contacts',contactRouter)
 app.use('/api/user',userRoute)
 
 //error handaling

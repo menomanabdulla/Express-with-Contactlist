@@ -3,10 +3,11 @@ const Contacts = require('../model/contactModel')
 
 const createContact = (req,res)=>{
   const contacts = new Contacts({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      fbid: req.body.fbid
+      "name": req.body.name,
+      "email": req.body.email,
+      "phone": req.body.phone,
+      "social.facebook": req.body.facebook,
+      "social.twitter": req.body.twitter
   })
   contacts.save()
     .then(contacts=>{

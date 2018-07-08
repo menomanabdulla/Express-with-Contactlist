@@ -19,12 +19,30 @@ const contactSchema = new Schema({
     required: true,
     unique : true
    },
-   fbid:{
-    type: String,
-    trim: true,
-    required: true,
-    unique : true
-   }
+   social:{
+       facebook:{
+        type: String,
+        trim: true,
+        unique : true
+       },twitter:{
+        type: String,
+        trim: true,
+        unique : true
+       }
+    },userRef:[
+     {
+      contactList:{
+        type: String,
+        trim: true,
+        unique : true
+      },
+      favoriteList:{
+        type: String,
+        trim: true,
+        unique : true
+      }
+     }
+   ]
   })
 
 const contacts= mongoose.model('contacts', contactSchema)
