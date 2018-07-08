@@ -28,13 +28,39 @@ const signInUser = (req,res)=>{
       res.json({
           msg: 'user sign in complete'
       })
-  }
-  
-const user = (req,res)=>{
-      res.json({
-          msg: 'hello form user'
-      })
-  }
+}
+const singleUser = (req,res,next)=>{
+   const id = req.params.id
+   userModel.findById({_id : id})
+    .then(singleUser=>{
+        console.log(singleUser)
+        res.send(singleUser)
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send(err)
+    })
+}
+const user = (req,res,next)=>{
+    userModel.find()
+        .then(user=>{
+            if(user.length>0){
+                res.status(200).json({
+                    user
+                })
+            }else{
+                res.status(200).json({
+                    msg: 'there data is empty'
+                })
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json({
+                err
+            })
+        })
+}
   
 const upadateUser = (req,res)=>{
       res.json({
@@ -64,6 +90,7 @@ module.exports = {
     signUpUser,
     signInUser,
     user,
+    singleUser,
     upadateUser,
     faveList,
     faveListUpdate,
