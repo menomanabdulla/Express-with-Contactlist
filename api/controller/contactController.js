@@ -22,8 +22,23 @@ const createContact = (req,res)=>{
     })
 }
 const allContact = (req,res)=>{
-    res.json({
-        msg: 'hello form all contact'
+    userModel.find()
+    .then(user=>{
+        if(user.length>0){
+            res.status(200).json({
+                user
+            })
+        }else{
+            res.status(200).json({
+                msg: 'there data is empty'
+            })
+        }
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({
+            err
+        })
     })
 }
 const singleContact = (req,res)=>{

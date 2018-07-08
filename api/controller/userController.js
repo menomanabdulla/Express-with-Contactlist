@@ -62,13 +62,25 @@ const user = (req,res,next)=>{
         })
 }
   
-const upadateUser = (req,res)=>{
-      res.json({
-          msg: 'hello form user update'
-      })
+const upadateUser = (req,res,next)=>{
+      const id = req.params.id
+      console.log(req.body)
+      userModel.findByIdAndUpdate(id,{$set: req.body},{ new: true })
+        .then(updateUser=>{
+            console.log(updateUser)
+            res.json({
+                updateUser
+            })
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json({
+                err
+            })
+        })
   }
   
-const faveList = (req,res)=>{
+const faveList = (req,res,next)=>{
     res.json({
         msg: 'hello form favourite'
     })

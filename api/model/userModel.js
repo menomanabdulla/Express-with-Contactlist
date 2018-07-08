@@ -25,7 +25,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 6
    },userRef:[
-    {
+   {
      contactList:{
        type: String,
        trim: true,
