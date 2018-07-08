@@ -67,9 +67,18 @@ const upadeContact = (req,res,next)=>{
         res.send(err)
     })
 }
-const deleteContact = (req,res)=>{
-    res.json({
-        msg: 'hello form delete contact'
+const deleteContact = (req,res,next)=>{
+    const id = req.params.id
+    ContactsModule.findOneAndRemove({ _id: id })
+    .then(deleteContact=>{
+        console.log(deleteContact)
+        res.json({
+            deleteContact
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send(err)
     })
 }
 
