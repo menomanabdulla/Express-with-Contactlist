@@ -1,13 +1,13 @@
 
-const Contacts = require('../model/contactModel')
+const ContactsModule = require('../model/contactModel')
 const createContact = (req,res)=>{
-  const contacts = new Contacts({
+  const contacts = new ContactsModule({
       "name": req.body.name,
       "email": req.body.email,
       "phone": req.body.phone,
       "social": req.body.social
   })
-  contacts.save()
+  ContactsModule.save()
     .then(contacts=>{
         console.log(contacts)
         res.status(201).json({
@@ -21,12 +21,12 @@ const createContact = (req,res)=>{
         })
     })
 }
-const allContact = (req,res)=>{
-    userModel.find()
-    .then(user=>{
-        if(user.length>0){
+const allContact = (req,res,next)=>{
+    ContactsModule.find()
+    .then(allContact=>{
+        if(allContact.length>0){
             res.status(200).json({
-                user
+                allContact
             })
         }else{
             res.status(200).json({
@@ -41,14 +41,30 @@ const allContact = (req,res)=>{
         })
     })
 }
-const singleContact = (req,res)=>{
-    res.json({
-        msg: 'hello form single contact'
-    })
+const singleContact = (req,res,next)=>{
+    const id = req.params.id
+    ContactsModule.findById({_id : id})
+     .then(singleContact=>{
+         console.log(singleContact)
+         res.send(singleContact)
+     })
+     .catch(err=>{
+         console.log(err)
+         res.send(err)
+     })
 }
-const upadeContact = (req,res)=>{
-    res.json({
-        msg: 'hello form update contact'
+const upadeContact = (req,res,next)=>{
+    const id = req.params.id
+    ContactsModule.findByIdAndUpdate(id,{$set : req.body},{new: true})
+    .then(updateContact=>{
+        console.log(updateContact)
+        res.json({
+            updateContact
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send(err)
     })
 }
 const deleteContact = (req,res)=>{
