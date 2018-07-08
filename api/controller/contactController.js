@@ -5,7 +5,7 @@ const createContact = (req,res)=>{
       "name": req.body.name,
       "email": req.body.email,
       "phone": req.body.phone,
-      
+      "social": req.body.social
   })
   contacts.save()
     .then(contacts=>{
