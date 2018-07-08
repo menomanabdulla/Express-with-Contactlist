@@ -1,13 +1,13 @@
 
 const ContactsModule = require('../model/contactModel')
-const createContact = (req,res)=>{
+const createContact = (req,res,next)=>{
   const contacts = new ContactsModule({
       "name": req.body.name,
       "email": req.body.email,
       "phone": req.body.phone,
       "social": req.body.social
   })
-  ContactsModule.save()
+  contacts.save()
     .then(contacts=>{
         console.log(contacts)
         res.status(201).json({
