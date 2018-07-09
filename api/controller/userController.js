@@ -1,7 +1,7 @@
 
 const userModel = require('../model/userModel')
 const bcrypt = require('bcrypt-nodejs')
-
+const jwt = require('jsonwebtoken')
 
 const signUpUser = (req,res,next)=>{
     userModel.find({email: req.body.email} || {userName: req.body.userName})
@@ -60,8 +60,16 @@ const signInUser = (req,res,next)=>{
                     msg: 'Authentication faild'
                 })
             }else{
-                res.json({
-                    msg : 'Login Successful'
+                const token = jwt.sign({  
+                    email: user.email,
+                    _id: user._id
+                     }, 'SECRET',{
+                         expiresIn: '1h'
+                     }
+                 )
+                 res.json({
+                    msg: 'Login successfully',
+                    token
                 })
             }
         })
