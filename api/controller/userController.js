@@ -4,40 +4,74 @@ const bcrypt = require('bcrypt-nodejs')
 
 
 const signUpUser = (req,res,next)=>{
-    bcrypt.hash(req.body.password, null, null, function(err, hash) {
-        if(err){
+    userModel.find({email: req.body.email} || {userName: req.body.userName})
+    .then(result=>{
+        if(result.length>0){
             res.json({
-                msg: 'hashing faild'
+                msg: 'This user is exist'
             })
         }else{
-            const user = new userModel({
-                name: req.body.name,
-                email: req.body.email,
-                userName: req.body.userName,
-                password: hash
+            bcrypt.hash(req.body.password, null, null, function(err, hash) {
+                if(err){
+                    res.json({
+                        msg: 'hashing faild'
+                    })
+                }else{
+                    const user = new userModel({
+                        name: req.body.name,
+                        email: req.body.email,
+                        userName: req.body.userName,
+                        password: hash
+                    })
+                    user.save()
+                      .then(user=>{
+                          console.log(user)
+                          res.status(201).json({
+                            user
+                          })
+                      })
+                
+                      .catch(err=>{
+                          console.log(err)
+                          res.status(500).json({
+                              err
+                          })
+                      })
+                }
             })
-            user.save()
-              .then(user=>{
-                  console.log(user)
-                  res.status(201).json({
-                    user
-                  })
-              })
-        
-              .catch(err=>{
-                  console.log(err)
-                  res.status(500).json({
-                      err
-                  })
-              })
         }
-    });
+    })
+   
   }
   
-const signInUser = (req,res)=>{
-      res.json({
-          msg: 'user sign in complete'
-      })
+const signInUser = (req,res,next)=>{
+    const email = req.body.email
+    const password = req.body.password
+    const userName = req.body.userName
+    userModel.findOne({$or: [
+        {email},
+        {userName}
+    ]})
+    .then(user=>{
+        bcrypt.compare(password, user.password, (err, result)=> {
+            // res = false
+            if(err){
+                res.json({
+                    msg: 'Authentication faild'
+                })
+            }else{
+                res.json({
+                    msg : 'Login Successful'
+                })
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+        res.json({
+            msg: 'Catch Block Authentication faild'
+        })
+    })
 }
 const singleUser = (req,res,next)=>{
    const id = req.params.id
