@@ -30,7 +30,14 @@ const userSchema = new Schema({
     unique : true,
     required: true,
     minlength: 6
-   },userRef:[
+   }
+  })
+
+const user= mongoose.model('user', userSchema)
+
+module.exports = user
+
+/*,userRef:[
    {
      contactList:{
        type: String,
@@ -41,9 +48,4 @@ const userSchema = new Schema({
        trim: true
      }
     }
-  ]
-  })
-
-const user= mongoose.model('user', userSchema)
-
-module.exports = user
+  ] */
