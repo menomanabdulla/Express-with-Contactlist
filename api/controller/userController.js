@@ -46,8 +46,9 @@ const signUpUser = (req,res,next)=>{
   
 const signInUser = (req,res,next)=>{
     const email = req.body.email
-    const password = req.body.password
+    const password = req.body.password 
     const userName = req.body.userName
+
     userModel.findOne({$or: [
         {email},
         {userName}
