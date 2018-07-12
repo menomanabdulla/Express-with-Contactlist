@@ -4,9 +4,13 @@ const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
 
 const signUpUser = (req,res,next)=>{
-    userModel.find({email: req.body.email} || {userName: req.body.userName})
+    userModel.find({$or: [
+        {email: req.body.email},
+        {userName: req.body.userName}
+    ]})
     .then(result=>{
         if(result.length>0){
+            console.log(12)
             res.json({
                 msg: 'This user is exist'
             })

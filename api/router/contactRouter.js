@@ -1,10 +1,11 @@
 const router = require('express').Router()
 
 const contactController =  require('../controller/contactController')
+const authenticat = require('../middlewares/protector')
 
 //contacts route
-router.post('/',contactController.createContact)
-router.get('/',contactController.allContact)
+router.post('/', authenticat, contactController.createContact)
+router.get('/',authenticat, contactController.allContact)
 router.get('/:id',contactController.singleContact)
 router.patch('/:id',contactController.upadeContact)
 router.delete('/:id',contactController.deleteContact)

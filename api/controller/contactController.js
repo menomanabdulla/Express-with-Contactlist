@@ -1,5 +1,6 @@
 
 const ContactsModule = require('../model/contactModel')
+const userModel = require('../model/userModel')
 const createContact = (req,res,next)=>{
 
   const contacts = new ContactsModule({
@@ -21,6 +22,7 @@ const createContact = (req,res,next)=>{
             err
         })
     })
+    /*userModel.findOneAndUpdate({name: req.user.name}, {$push: {friends: friend}})*/
 }
 const allContact = (req,res,next)=>{
     ContactsModule.find()

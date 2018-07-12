@@ -30,7 +30,16 @@ const userSchema = new Schema({
     unique : true,
     required: true,
     minlength: 6
-   }
+   },
+  contactId: { 
+    type: Array, 
+    default: void 0
+  },
+  favoriteId: { 
+      type: Array, 
+      default: void 0
+  }
+
   })
 
 const user= mongoose.model('user', userSchema)
