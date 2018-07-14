@@ -1,28 +1,34 @@
 
 const ContactsModule = require('../model/contactModel')
-const userModel = require('../model/userModel')
+//const userModel = require('../model/userModel')
 const createContact = (req,res,next)=>{
-
   const contacts = new ContactsModule({
       "name": req.body.name,
       "email": req.body.email,
       "phone": req.body.phone,
       "social": req.body.social
   })
+  console.log(contacts)
   contacts.save()
     .then(contacts=>{
-        console.log(contacts)
+        //console.log(contacts)
         res.status(201).json({
             contacts
         })
     })
     .catch(err=>{
-        console.log(err)
+        console.log(contacts)
         res.status(500).json({
-            err
+            msg: "con't save this contact"
         })
     })
-    /*userModel.findOneAndUpdate({name: req.user.name}, {$push: {friends: friend}})*/
+    /*userModel.findOneAndUpdate(
+        {
+            id: req.user._id
+        },
+        {
+            $push: {contactId: 'ID-one'}
+    })*/
 }
 const allContact = (req,res,next)=>{
     ContactsModule.find()

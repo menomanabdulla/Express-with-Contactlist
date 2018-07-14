@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
+//const validator = require('validator')
 const Schema = mongoose.Schema
 
 const contactSchema = new Schema({
@@ -11,13 +11,7 @@ const contactSchema = new Schema({
    email: {
     type: String,
     trim: true,
-    minlength: 3,
-    validate: {
-      validator: v =>{
-        return validator.isEmail(v)
-      },
-      message: '{VALUE} is not a valid email'
-    }
+    minlength: 3
    },
    phone:{
     type: String,
@@ -28,10 +22,20 @@ const contactSchema = new Schema({
    social:{
       type: String,
       trim: true,
-      required: true,
+      required: true
     }
   })
 
 const contacts= mongoose.model('contacts', contactSchema)
 
 module.exports = contacts
+
+/*
+,
+    validate: {
+      validator: v =>{
+        return validator.isEmail(v)
+      },
+      message: '{VALUE} is not a valid email'
+    }
+*/ 
