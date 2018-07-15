@@ -29,6 +29,7 @@ const createContact = (req,res,next)=>{
         {
             $push: {contactId: 'ID-one'}
     })*/
+    
 }
 const allContact = (req,res,next)=>{
     ContactsModule.find()

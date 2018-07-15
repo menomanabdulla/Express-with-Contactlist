@@ -77,9 +77,13 @@ const signInUser = (req,res,next)=>{
                          expiresIn: '1h'
                      }
                  )
-                 res.json({
+                /*res.json({
                     msg: 'Login successfully',
                     token
+                })*/
+                res.json({
+                    "token" : token,
+                    "user" : user
                 })
             }
         })
