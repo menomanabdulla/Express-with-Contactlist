@@ -15,6 +15,14 @@ const createContact = (req,res,next)=>{
         res.status(201).json({
             contacts
         })
+        console.log(res.locals._id)
+       /* userModel.findOneAndUpdate(
+            {
+                id: res.locals._id
+            },
+            {
+                $push: {contactId: 'ID-one'}
+        })*/
     })
     .catch(err=>{
         console.log(contacts)

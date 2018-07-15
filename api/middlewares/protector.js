@@ -13,7 +13,7 @@ const authenticates = (req,res,next)=>{
               message: 'Failed to authenticate token.'
             });
           } else {
-            req.decoded = decoded;
+            res.locals = decoded;
             next();
           }
         });
