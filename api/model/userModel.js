@@ -31,11 +31,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 6
    },
-  contactId: { 
+   contacts: { 
     type: Array, 
     default: void 0
   },
-  favoriteId: { 
+  favorites: { 
       type: Array, 
       default: void 0
   }
