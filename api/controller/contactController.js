@@ -47,22 +47,36 @@ const createContact = (req,res,next)=>{
     
 }
 const allContact = (req,res,next)=>{
-    ContactsModule.find()
-    .then(allContact=>{
-        if(allContact.length>0){
-            res.status(200).json({
-                allContact
+    userModel.findById({_id : `${res.locals._id}`}) 
+    .then(user=>{
+        //console.log(user['contacts'])
+        //return user['contacts']
+        ContactsModule.find()
+        .where('_id')
+        .in(
+            user['contacts']
+        )
+        .then(allContact=>{
+            if(allContact.length>0){
+                res.status(200).json({
+                    allContact
+                })
+            }else{
+                res.status(200).json({
+                    msg: 'there data is empty'
+                })
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json({
+                err
             })
-        }else{
-            res.status(200).json({
-                msg: 'there data is empty'
-            })
-        }
+        })
     })
     .catch(err=>{
-        console.log(err)
-        res.status(500).json({
-            err
+        res.josn({
+            msg: 'User Should be login '
         })
     })
 }
