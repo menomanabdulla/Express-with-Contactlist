@@ -68,15 +68,14 @@ const allContact = (req,res,next)=>{
             }
         })
         .catch(err=>{
-            console.log(err)
             res.status(500).json({
-                err
+                msg : "Can't find any data"
             })
         })
     })
     .catch(err=>{
         res.josn({
-            msg: 'User Should be login '
+            msg: 'User Should be login for get contacts'
         })
     })
 }
@@ -93,18 +92,36 @@ const singleContact = (req,res,next)=>{
      })
 }
 const upadeContact = (req,res,next)=>{
-    const id = req.params.id
-    ContactsModule.findByIdAndUpdate(id,{$set : req.body},{new: true})
-    .then(updateContact=>{
-        console.log(updateContact)
-        res.json({
-            updateContact
-        })
+    userModel.findById({_id : `${res.locals._id}`}) 
+    .then(user=>{
+        const id = req.params.id
+        if((user['contacts']).includes(id)){
+            console.log('update condition working fine')
+            ContactsModule.findByIdAndUpdate(id,{$set : req.body},{new: true})
+            .then(updateContact=>{
+                console.log(updateContact)
+                res.json({
+                    updateContact
+                })
+            })
+            .catch(err=>{
+                res.json({
+                    msg : "Sorry Can't update"
+                })
+            })
+        }else{
+            res.json({
+                msg : "Sorry Cross mitch-match of updating value"
+            })
+        }
     })
     .catch(err=>{
-        console.log(err)
-        res.send(err)
+        res.josn({
+            msg: 'User Should be login for updateing info'
+        })
     })
+    
+    
 }
 const deleteContact = (req,res,next)=>{
     const id = req.params.id
