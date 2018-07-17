@@ -82,8 +82,7 @@ const signInUser = (req,res,next)=>{
                     token
                 })*/
                 res.json({
-                    "token" : token,
-                    "user" : user._id
+                    "token" : token
                 })
             }
         })

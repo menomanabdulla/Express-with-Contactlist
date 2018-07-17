@@ -47,6 +47,7 @@ const createContact = (req,res,next)=>{
     
 }
 const allContact = (req,res,next)=>{
+    console.log(res)
     userModel.findById({_id : `${res.locals._id}`}) 
     .then(user=>{
         //console.log(user['contacts'])
@@ -69,7 +70,7 @@ const allContact = (req,res,next)=>{
         })
         .catch(err=>{
             res.status(500).json({
-                msg : "Can't find any data"
+                msg : err
             })
         })
     })
@@ -79,24 +80,41 @@ const allContact = (req,res,next)=>{
         })
     })
 }
+/*
 const singleContact = (req,res,next)=>{
-    const id = req.params.id
-    ContactsModule.findById({_id : id})
-     .then(singleContact=>{
-         console.log(singleContact)
-         res.send(singleContact)
-     })
-     .catch(err=>{
-         console.log(err)
-         res.send(err)
-     })
-}
+    userModel.findById({_id : `${res.locals._id}`}) 
+    .then(user=>{
+        const id = req.params.id
+        if((user['contacts']).includes(id)){
+            ContactsModule.findById({_id : id})
+            .then(singleContact=>{
+                console.log(singleContact)
+                res.send(singleContact)
+            })
+            .catch(err=>{
+                res.json({
+                    msg: "Con't fatch single contact"
+                })
+            })
+        }else{
+            res.json({
+                msg : "Sorry Cross mitch-match single contact"
+            })
+        }
+    })
+    .catch(err=>{
+        console.log(`${res.locals._id}`)
+        res.json({
+            msg: "User should be login"
+        })
+    })
+}*/
 const upadeContact = (req,res,next)=>{
     userModel.findById({_id : `${res.locals._id}`}) 
     .then(user=>{
         const id = req.params.id
         if((user['contacts']).includes(id)){
-            console.log('update condition working fine')
+            console.log(req)
             ContactsModule.findByIdAndUpdate(id,{$set : req.body},{new: true})
             .then(updateContact=>{
                 console.log(updateContact)
@@ -116,12 +134,11 @@ const upadeContact = (req,res,next)=>{
         }
     })
     .catch(err=>{
-        res.josn({
-            msg: 'User Should be login for updateing info'
+        console.log(`${res.locals._id}`)
+        res.json({
+            msg: "User should be login"
         })
     })
-    
-    
 }
 const deleteContact = (req,res,next)=>{
     const id = req.params.id
