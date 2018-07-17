@@ -80,7 +80,7 @@ const allContact = (req,res,next)=>{
         })
     })
 }
-/*
+
 const singleContact = (req,res,next)=>{
     userModel.findById({_id : `${res.locals._id}`}) 
     .then(user=>{
@@ -108,7 +108,7 @@ const singleContact = (req,res,next)=>{
             msg: "User should be login"
         })
     })
-}*/
+}
 const upadeContact = (req,res,next)=>{
     userModel.findById({_id : `${res.locals._id}`}) 
     .then(user=>{
