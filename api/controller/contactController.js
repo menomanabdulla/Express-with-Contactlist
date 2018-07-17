@@ -141,17 +141,52 @@ const upadeContact = (req,res,next)=>{
     })
 }
 const deleteContact = (req,res,next)=>{
-    const id = req.params.id
-    ContactsModule.findOneAndRemove({ _id: id })
-    .then(deleteContact=>{
-        console.log(deleteContact)
-        res.json({
-            deleteContact
-        })
+    userModel.findById({_id : `${res.locals._id}`}) 
+    .then(user=>{
+        const id = req.params.id
+        if((user['contacts']).includes(id)){
+
+           
+            //delete contact_id from userModule
+            userModel.update(
+                {
+                    _id: `${res.locals._id}`
+                },
+                { $pull: {'contacts': id}},
+                {new: true},
+                function(err, doc){
+                    if(err){
+                        console.log("Error pushing contacts in user");
+                    }
+                    res.json({
+                        msg: 'Successfully deleted'
+                    })
+                }
+            )
+            //delete contact body from ContactsModule
+            ContactsModule.findOneAndRemove({ _id: id })
+            .then(deleteContact=>{
+                console.log(deleteContact)
+                res.json({
+                    deleteContact
+                })
+            })
+            .catch(err=>{
+                res.json({
+                    msg: 'There is no contact for drope'
+                })
+            })
+        }else{
+            res.json({
+                msg : "Sorry Cross mitch-match for Delete contact"
+            })
+        }
     })
     .catch(err=>{
-        console.log(err)
-        res.send(err)
+        console.log(`${res.locals._id}`)
+        res.json({
+            msg: "User should be login"
+        })
     })
 }
 
