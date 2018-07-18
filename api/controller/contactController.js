@@ -80,7 +80,6 @@ const allContact = (req,res,next)=>{
         })
     })
 }
-
 const singleContact = (req,res,next)=>{
     userModel.findById({_id : `${res.locals._id}`}) 
     .then(user=>{

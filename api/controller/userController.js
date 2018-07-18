@@ -128,7 +128,7 @@ const user = (req,res,next)=>{
 }
   
 const upadateUser = (req,res,next)=>{
-      const id = req.params.id
+      const id = `${res.locals._id}`
       userModel.findByIdAndUpdate(id,{$set: req.body},{ new: true })
         .then(updateUser=>{
             console.log(updateUser)
