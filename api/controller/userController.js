@@ -143,7 +143,22 @@ const upadateUser = (req,res,next)=>{
             })
         })
   }
-  
+const deleteUser = (req,res,next)=>{
+    const id = `${res.locals._id}`
+    userModel.findByIdAndUpdate(id,{$set: req.body},{ new: true })
+      .then(updateUser=>{
+          console.log(updateUser)
+          res.json({
+              updateUser
+          })
+      })
+      .catch(err=>{
+          console.log(err)
+          res.status(500).json({
+              err
+          })
+      })
+}
 const faveList = (req,res,next)=>{
     res.json({
         msg: 'hello form favourite'
@@ -168,6 +183,7 @@ module.exports = {
     user,
     singleUser,
     upadateUser,
+    deleteUser,
     faveList,
     faveListUpdate,
     faveListDelete
